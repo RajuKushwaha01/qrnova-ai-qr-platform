@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      FORCE_HTTPS: "1"
+      BASE_URL: https://${DOMAIN}
+    volumes:
+      - qrdata:/data        # database, hosted files, logs and backups all live here
+    expose:
+      - "3000"
+
+  caddy:                     # automatic HTTPS (free Let's Encrypt certificates)
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  qrdata:
+  caddy_data:
+  caddy_config:

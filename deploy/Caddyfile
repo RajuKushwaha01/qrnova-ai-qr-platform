@@ -1,0 +1,16 @@
+{$DOMAIN} {
+	encode zstd gzip
+
+	# never expose metrics publicly
+	@internal path /metrics /metrics/*
+	respond @internal 404
+
+	request_body {
+		max_size 300MB
+	}
+
+	reverse_proxy app:3000 {
+		health_uri /readyz
+		health_interval 30s
+	}
+}

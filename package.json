@@ -1,0 +1,29 @@
+{
+  "name": "qrnova-ai-qr-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered universal QR code platform (static + dynamic QR)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:prod": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node tests/run.js",
+    "doctor": "node scripts/doctor.js",
+    "backup": "node scripts/backup.js",
+    "restore": "node scripts/backup.js restore",
+    "export:mongo": "node scripts/migrate-mongo.js --export",
+    "migrate:mongo": "node scripts/migrate-mongo.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
+    "multer": "^2.0.0",
+    "pdf-parse": "1.1.1",
+    "qrcode": "^1.5.3"
+  },
+  "optionalDependencies": {
+    "nodemailer": "^6.9.14"
+  },
+  "engines": { "node": ">=18" }
+}

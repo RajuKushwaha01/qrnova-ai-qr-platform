@@ -1,0 +1,7 @@
+(() => {
+  const RAW = 'India|IN|91;United States|US|1;United Kingdom|GB|44;Canada|CA|1;Australia|AU|61;New Zealand|NZ|64;Ireland|IE|353;Germany|DE|49;France|FR|33;Italy|IT|39;Spain|ES|34;Portugal|PT|351;Netherlands|NL|31;Belgium|BE|32;Switzerland|CH|41;Austria|AT|43;Sweden|SE|46;Norway|NO|47;Denmark|DK|45;Finland|FI|358;Poland|PL|48;Czechia|CZ|420;Greece|GR|30;Turkey|TR|90;Russia|RU|7;Ukraine|UA|380;Israel|IL|972;United Arab Emirates|AE|971;Saudi Arabia|SA|966;Qatar|QA|974;Kuwait|KW|965;Oman|OM|968;Bahrain|BH|973;Egypt|EG|20;South Africa|ZA|27;Nigeria|NG|234;Kenya|KE|254;Ghana|GH|233;Pakistan|PK|92;Bangladesh|BD|880;Sri Lanka|LK|94;Nepal|NP|977;Bhutan|BT|975;Maldives|MV|960;Afghanistan|AF|93;Iran|IR|98;Iraq|IQ|964;China|CN|86;Hong Kong|HK|852;Taiwan|TW|886;Japan|JP|81;South Korea|KR|82;Singapore|SG|65;Malaysia|MY|60;Indonesia|ID|62;Thailand|TH|66;Vietnam|VN|84;Philippines|PH|63;Myanmar|MM|95;Cambodia|KH|855;Mexico|MX|52;Brazil|BR|55;Argentina|AR|54;Chile|CL|56;Colombia|CO|57;Peru|PE|51';
+  window.COUNTRIES = RAW.split(';').map((s) => {
+    const [n, c, d] = s.split('|');
+    return { n, c, d, f: String.fromCodePoint(...[...c].map((x) => 127397 + x.charCodeAt(0))) };
+  }).sort((a, b) => a.n.localeCompare(b.n));
+})();
